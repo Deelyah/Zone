@@ -1,7 +1,7 @@
 <template>
-  <div class="flex items-center justify-center h-screen">
-    <div class="bg-white shadow-lg p-5 w-3/6 mt-8 md:w-2/5">
-      <form @submit.prevent="collectData" class="w-full mt-8 md:w-4/5">
+  <div class="flex items-center justify-center h-4/5">
+    <div class="bg-white shadow-lg p-5 w-3/6">
+      <form @submit.prevent="collectData" class="w-full">
         <div class="mt-4">
           <label
             for="email"

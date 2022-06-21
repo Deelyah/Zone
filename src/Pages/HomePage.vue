@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center items-center h-screen">
+  <div class="flex justify-center items-center h-screen mt-20">
     <div class="bg-blue-700 shadow-md w-2/3 px-5 py-10 text-white">
       <h1>
         Welcome to
