@@ -55,14 +55,38 @@
                 class="text-xs font-semibold text-blue-700 md:text-sm"
                 >Password*</label
               >
-              <input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="6+ characters"
-                min="6"
-                class="block w-full px-2 py-2 mt-2 border border-gray-300 rounded focus:border-blue-700 focus:outline-none"
-              />
+              <div
+                class="flex border-gray-300 rounded focus:border-blue-700 border"
+              >
+                <input
+                  :type="`${passwordIsVisible ? 'text' : 'password'}`"
+                  name="password"
+                  id="password"
+                  placeholder="8+ characters"
+                  min="8"
+                  v-model="passwordValue"
+                  class="block w-full px-2 py-2 mt-2 focus:outline-none"
+                  v-on:copy="false"
+                />
+                <div class="flex items-end pb-2 pr-4">
+                  <button
+                    type="button"
+                    @click="passwordIsVisible = !passwordIsVisible"
+                    :class="`${passwordValue ? 'block' : 'hidden'}`"
+                  >
+                    <img
+                      src="../assets/eye.png"
+                      alt="View Password"
+                      v-if="passwordIsVisible"
+                    />
+                    <img
+                      src="../assets/eyelashes.png"
+                      alt="Close Password"
+                      v-else
+                    />
+                  </button>
+                </div>
+              </div>
             </div>
             <button
               type="submit"
@@ -91,7 +115,9 @@
 export default {
   data() {
     return {
-      isSigningUp: true,
+      isSigningUp: this.$route.path.includes("signin") ? true : false,
+      passwordIsVisible: false,
+      passwordValue: null,
     };
   },
 
