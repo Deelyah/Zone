@@ -6,6 +6,7 @@ import actions from "./actions";
 const store = createStore({
   state() {
     return {
+      userIsLoggedIn: localStorage.getItem("token") ? true : false,
       allUsers: [],
     };
   },

@@ -1,6 +1,6 @@
 <template>
   <div class="sticky top-0 h-screen overflow-scroll pt-5">
-    <div class="flex items-center justify-center users">
+    <div class="flex items-center justify-center">
       <div class="bg-white shadow-lg p-5 w-5/6">
         <ul class="flex flex-wrap justify-between">
           <li

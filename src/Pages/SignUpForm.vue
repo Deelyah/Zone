@@ -1,7 +1,9 @@
 <template>
-  <div class="flex items-center justify-center h-screen">
-    <div class="bg-white shadow-lg p-5 w-3/6 mt-8 md:w-2/5">
-      <form @submit.prevent="submitForm" class="w-full">
+  <div
+    class="flex items-center justify-center h-4/5 sticky top-0 overflow-scroll mt-10 sm:mt-0"
+  >
+    <div class="bg-white shadow-lg p-5 w-4/5 sm:w-3/6">
+      <form @submit.prevent="signIn" class="w-full">
         <div>
           <label
             for="firstname"
@@ -152,7 +154,7 @@ export default {
   },
 
   methods: {
-    submitForm() {
+    signIn() {
       const reg = /^[A-Za-z0-9 ]+$/.test(this.passwordValue);
       if (reg || this.passwordValue.length < 8) {
         this.pswdError = true;
@@ -167,10 +169,16 @@ export default {
             email: this.email,
             password: this.passwordValue,
           })
-          .then(() => {
-            this.loading = false;
-            this.$router.push("/users");
-          });
+          .then(
+            () => {
+              this.loading = false;
+              this.$router.push("/login");
+            },
+            (error) => {
+              this.loading = false;
+              alert(error.response);
+            }
+          );
       }
     },
   },
