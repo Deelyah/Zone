@@ -80,7 +80,7 @@ export default {
       console.log(IP);
       const getLocation = await axios.get(
         `https://api.apilayer.com/ip_to_location/${IP}`,
-        { headers: { apikey: locationKey } }
+        { headers: { apikey: `${locationKey}` } }
       );
       commit("setUserLocation", {
         city: getLocation.data.city,
