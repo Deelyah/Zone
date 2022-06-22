@@ -1,21 +1,31 @@
 <template>
-  <div class="sticky top-0 h-screen overflow-scroll pt-5">
-    <div class="flex items-center justify-center">
-      <div class="bg-white shadow-lg p-5 w-5/6">
-        <ul class="flex flex-wrap justify-between">
-          <li
-            v-for="(user, index) in allUsers"
-            :key="index"
-            class="basis-1/4 mb-16"
-          >
-            <div class="flex flex-col items-center justify-center">
-              <img :src="user.avatar" />
-              <p>Name: {{ user.first_name }} {{ user.last_name }}</p>
-              <p>Email: {{ user.email }}</p>
-            </div>
-          </li>
-        </ul>
+  <div>
+    <div class="sticky top-0 h-screen overflow-scroll pt-5">
+      <div class="flex items-center justify-center">
+        <div class="bg-white shadow-lg p-5 w-5/6">
+          <ul class="flex flex-wrap justify-between">
+            <li
+              v-for="(user, index) in allUsers"
+              :key="index"
+              class="basis-1/4 mb-16"
+            >
+              <div class="flex flex-col items-center justify-center">
+                <img :src="user.avatar" />
+                <p>Name: {{ user.first_name }} {{ user.last_name }}</p>
+                <p>Email: {{ user.email }}</p>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
+    </div>
+    <div id="pagination">
+      <div>Prev</div>
+      <div>
+        <div>1</div>
+        <div>2</div>
+      </div>
+      <div>Next</div>
     </div>
   </div>
 </template>

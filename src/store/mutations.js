@@ -10,4 +10,9 @@ export default {
   setUsersProfile(state, payload) {
     state.profile = payload;
   },
+
+  setUserLocation(state, payload) {
+    state.location = payload;
+    console.log(payload);
+  },
 };

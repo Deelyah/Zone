@@ -6,4 +6,7 @@ export default {
   getAllUsers(state) {
     return state.allUsers;
   },
+  getUserLocation(state) {
+    return state.location;
+  },
 };

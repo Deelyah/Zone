@@ -33,6 +33,7 @@
           <ul class="w-full">
             <li>
               <button
+                @click="location = !location"
                 class="text-left py-3 border border-gray-400 w-full rounded mb-6 pl-3 hover:bg-blue-700 hover:text-white hover:border-white"
               >
                 My location
@@ -69,6 +70,10 @@
         </div>
       </div>
     </div>
+    <ViewLocation
+      v-if="location"
+      @closeForm="location = !location"
+    ></ViewLocation>
     <CreateProfile
       v-if="createProfile"
       @closeForm="createProfile = !createProfile"
@@ -92,16 +97,18 @@
 <script>
 import UpdateProfile from "../components/UpdateProfile.vue";
 import CreateProfile from "../components/CreateProfile.vue";
+import ViewLocation from "../components/ViewLocation.vue";
 export default {
   data() {
     return {
+      location: false,
       createProfile: false,
       editProfile: false,
       toggleDisable: false,
       isProfileDeleted: false,
     };
   },
-  components: { UpdateProfile, CreateProfile },
+  components: { UpdateProfile, CreateProfile, ViewLocation },
   methods: {
     deleteProfile() {
       if (this.toggleDisable) {

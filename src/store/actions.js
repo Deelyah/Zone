@@ -60,20 +60,43 @@ export default {
 
   async signUp(context, payload) {
     try {
-      const response = await axios.post(`${baseUrl}/users/register`, payload);
+      await axios.post(`${baseUrl}/users/register`, payload);
       context.dispatch("fetchAllUsers");
-      console.log("Signup", response);
     } catch (error) {
       console.log(error);
     }
   },
 
   async login({ commit }, payload) {
+    const locationKey = process.env.VUE_APP_LOCATION_API_KEY;
+    const IPkey = process.env.VUE_APP_IP_DATA_API_KEY;
+
+    // let myHeaders = new Headers();
+    // myHeaders.append();
+
+    // let requestOptions = {
+    //   method: "GET",
+    //   redirect: "follow",
+    //   headers: myHeaders,
+    // };
     try {
       const response = await axios.post(`${baseUrl}/login`, payload);
+      const getIP = await axios.get(`https://api.ipdata.co/?api-key=${IPkey}`);
+      const IP = getIP.data.ip;
+      console.log(IP);
+      const getLocation = await axios.get(
+        `https://api.apilayer.com/ip_to_location/${IP}`,
+        { headers: { apikey: locationKey } }
+      );
+      commit("setUserLocation", {
+        city: getLocation.data.city,
+        state: getLocation.data.region_name,
+        country: getLocation.data.country_name,
+      });
+
       localStorage.setItem("token", response.data.token);
+      // console.log(userLocation.data);
       commit("toggleLoginState");
-      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
