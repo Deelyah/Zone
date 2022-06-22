@@ -6,4 +6,8 @@ export default {
   setAllUsers(state, allUsers) {
     state.allUsers = allUsers;
   },
+
+  setUsersProfile(state, payload) {
+    state.profile = payload;
+  },
 };

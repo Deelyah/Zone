@@ -32,7 +32,7 @@
             </svg>
           </button>
         </div>
-        <form @submit.prevent="updateProfile">
+        <form @submit.prevent="createProfile">
           <div class="p-6 space-y-6">
             <div class="mt-4">
               <label
@@ -118,12 +118,14 @@ export default {
   },
 
   methods: {
-    updateProfile() {
+    createProfile() {
       this.loading = true;
-      this.$store.dispatch("createProfile").then(() => {
-        this.loading = false;
-        this.$emit("create");
-      });
+      this.$store
+        .dispatch("createProfile", { name: this.name, job: this.job })
+        .then(() => {
+          this.loading = false;
+          this.$emit("create");
+        });
     },
   },
 };

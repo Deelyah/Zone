@@ -18,24 +18,28 @@ export default {
     // }
   },
 
-  async createProfile(_, payload) {
+  async createProfile(context, payload) {
     try {
-      await axios.post(`${baseUrl}/users`, {
-        headers: authHeader(),
-        body: payload,
-      });
-      // context.commit("setAllUsers", response.data.data);
+      const response = await axios.post(
+        `${baseUrl}/users`,
+        payload,
+        authHeader()
+      );
+      console.log(response.data);
+      context.commit("setUsersProfile", response.data);
     } catch (error) {
       console.log(error);
     }
   },
 
-  async updateProfile(_, payload) {
+  async updateProfile(context, payload) {
+    const id = context.state.profile.id;
     try {
-      const response = await axios.put(`${baseUrl}/users`, {
-        headers: authHeader(),
-        body: payload,
-      });
+      const response = await axios.put(
+        `${baseUrl}/users/${id}`,
+        payload,
+        authHeader()
+      );
       console.log(response.data);
     } catch (error) {
       console.log(error);
@@ -44,11 +48,11 @@ export default {
 
   async deleteProfile(_, payload) {
     try {
-      const response = await axios.delete(`${baseUrl}/users/2`, {
+      await axios.delete(`${baseUrl}/users/2`, {
         headers: authHeader(),
         body: payload,
       });
-      console.log(response.data);
+      // console.log(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -64,12 +68,12 @@ export default {
     }
   },
 
-  async login({ commit, state }, payload) {
+  async login({ commit }, payload) {
     try {
       const response = await axios.post(`${baseUrl}/login`, payload);
       localStorage.setItem("token", response.data.token);
       commit("toggleLoginState");
-      console.log(state.userIsLoggedIn);
+      console.log(response.data);
     } catch (error) {
       console.log(error);
     }

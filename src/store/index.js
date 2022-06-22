@@ -8,6 +8,7 @@ const store = createStore({
     return {
       userIsLoggedIn: localStorage.getItem("token") ? true : false,
       allUsers: [],
+      profile: {},
     };
   },
   mutations,
