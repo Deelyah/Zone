@@ -3,9 +3,9 @@ import authHeader from "../services/auth-header";
 const baseUrl = "https://reqres.in/api";
 
 export default {
-  async fetchAllUsers(context) {
+  async fetchAllUsers(context, payload) {
     try {
-      const response = await axios.get(`${baseUrl}/users?page=1`, {
+      const response = await axios.get(`${baseUrl}/users?page=${payload}`, {
         headers: authHeader(),
       });
       context.commit("setAllUsers", response.data.data);
@@ -71,16 +71,10 @@ export default {
     const locationKey = process.env.VUE_APP_LOCATION_API_KEY;
     const IPkey = process.env.VUE_APP_IP_DATA_API_KEY;
 
-    // let myHeaders = new Headers();
-    // myHeaders.append();
-
-    // let requestOptions = {
-    //   method: "GET",
-    //   redirect: "follow",
-    //   headers: myHeaders,
-    // };
     try {
       const response = await axios.post(`${baseUrl}/login`, payload);
+      localStorage.setItem("token", response.data.token);
+
       const getIP = await axios.get(`https://api.ipdata.co/?api-key=${IPkey}`);
       const IP = getIP.data.ip;
       console.log(IP);
@@ -94,7 +88,6 @@ export default {
         country: getLocation.data.country_name,
       });
 
-      localStorage.setItem("token", response.data.token);
       // console.log(userLocation.data);
       commit("toggleLoginState");
     } catch (error) {
