@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+const FalseHome = () => import("@/pages/FalseHomePage.vue");
 const Home = () => import("@/pages/HomePage.vue");
 const SignUpForm = () => import("@/pages/SignUpForm.vue");
 const LoginForm = () => import("@/pages/LoginForm.vue");
@@ -8,7 +9,18 @@ const myAccount = () => import("@/pages/MyAccount.vue");
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: "/", component: Home },
+    { path: "/", component: FalseHome },
+    {
+      path: "/home",
+      component: Home,
+      beforeEnter: (_, _2, next) => {
+        if (localStorage.getItem("token")) {
+          next();
+        } else {
+          next("/login");
+        }
+      },
+    },
     {
       path: "/signup",
       component: SignUpForm,

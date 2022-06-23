@@ -142,7 +142,7 @@ export default {
               }, 5000);
             }
             this.loading = false;
-            this.$router.push("/myaccount");
+            this.$router.replace("/home");
           },
           (error) => {
             this.loading = false;

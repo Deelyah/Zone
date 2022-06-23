@@ -3,7 +3,9 @@
     <div
       class="sticky top-0 h-screen overflow-scroll pt-5 flex justify-center w-full"
     >
-      <div class="flex flex-col items-center bg-white shadow-lg p-5 w-5/6">
+      <div
+        class="flex flex-col items-center bg-white shadow-lg p-5 w-5/6 sm:w-4/6 md:w-3/6"
+      >
         <Alert
           :displayAlert="displayAlert"
           :alertColor="alertColor"
