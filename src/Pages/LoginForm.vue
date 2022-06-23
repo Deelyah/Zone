@@ -131,18 +131,21 @@ export default {
         .dispatch("login", { email: this.email, password: this.passwordValue })
         .then(
           () => {
-            
+            if (localStorage.getItem("token")) {
+              this.displayAlert = false;
+            } else {
+              this.displayAlert = true;
+              this.alertMessage = "Network error";
+              this.alertColor = "red";
+              setTimeout(() => {
+                this.displayAlert = false;
+              }, 5000);
+            }
             this.loading = false;
             this.$router.push("/myaccount");
           },
           (error) => {
             this.loading = false;
-            this.displayAlert = true;
-            this.alertMessage = error.message;
-            this.alertColor = "red";
-            setTimeout(() => {
-              this.displayAlert = false;
-            }, 3000);
             alert(error);
           }
         );

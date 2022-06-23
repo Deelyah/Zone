@@ -79,7 +79,6 @@ export default {
       this.loading = true;
       this.$store.dispatch("fetchAllUsers", 1).then(() => {
         this.allUsers = this.$store.getters.getAllUsers;
-        console.log(this.allUsers);
         this.loading = false;
       });
     },
