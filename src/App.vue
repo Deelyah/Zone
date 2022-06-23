@@ -63,20 +63,33 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      token: localStorage.getItem("token") ? true : false,
+    };
   },
   methods: {
     logOut() {
       localStorage.removeItem("token");
+      this.token;
       this.$store.commit("toggleLoginState");
       this.$router.push("/");
-      console.log(this.$store.getters.getUserState);
+      // console.log(this.$store.getters.getUserState);
     },
   },
-  computed: {
-    token() {
-      return this.$store.getters.getUserState;
+
+  watch: {
+    $route() {
+      if (localStorage.getItem("token")) {
+        this.token = true;
+      } else {
+        this.token = false;
+      }
+      // console.log(this.token);
     },
+  },
+
+  created() {
+    this.token = localStorage.getItem("token") ? true : false;
   },
 };
 </script>

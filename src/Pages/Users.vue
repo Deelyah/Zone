@@ -22,14 +22,14 @@
       </svg>
       Loading
     </span>
-    <div v-else class="sticky top-0 h-screen overflow-scroll pt-5">
+    <div v-else class="sticky top-0 h-screen overflow-scroll py-5">
       <div class="flex items-center justify-center">
         <div class="bg-white shadow-lg p-5 w-5/6">
-          <ul class="flex flex-wrap justify-between">
+          <ul class="flex flex-wrap justify-center">
             <li
               v-for="(user, index) in allUsers"
               :key="index"
-              class="basis-1/4 mb-16"
+              class="basis-1/4 mb-16 px-5"
             >
               <div class="flex flex-col items-center justify-center">
                 <img :src="user.avatar" />
@@ -39,20 +39,10 @@
             </li>
           </ul>
 
-          <div
-            id="pagination"
-            class="bg-gray-200 shadow-lg flex justify-between"
-          >
+          <div id="pagination" class="flex justify-between mb-10">
             <button
-              @click="
-                () => {
-                  page1 = true;
-                  loading = true;
-                  $store.dispatch('fetchAllUsers', 1).then(() => {
-                    loading = false;
-                  });
-                }
-              "
+              @click="previous"
+              class="bg-gray-100 border border-gray-300 px-3 py-1"
             >
               Prev
             </button>
@@ -61,14 +51,8 @@
               <button v-else>2</button>
             </div>
             <button
-              @click="
-                () => {
-                  page1 = false;
-                  $store.dispatch('fetchAllUsers', 2).then(() => {
-                    loading = false;
-                  });
-                }
-              "
+              @click="next"
+              class="bg-gray-100 border border-gray-300 px-3 py-1"
             >
               Next
             </button>
@@ -88,12 +72,36 @@ export default {
       page1: true,
     };
   },
+
+  methods: {
+    previous() {
+      this.page1 = true;
+      this.loading = true;
+      this.$store.dispatch("fetchAllUsers", 1).then(() => {
+        this.allUsers = this.$store.getters.getAllUsers;
+        console.log(this.allUsers);
+        this.loading = false;
+      });
+    },
+
+    next() {
+      this.page1 = false;
+      this.loading = true;
+      this.$store.dispatch("fetchAllUsers", 2).then(() => {
+        this.allUsers = this.$store.getters.getAllUsers;
+        // console.log(this.allUsers);
+
+        this.loading = false;
+      });
+    },
+  },
+
   async created() {
     this.loading = true;
     await this.$store.dispatch("fetchAllUsers", 1).then(() => {
+      this.allUsers = this.$store.getters.getAllUsers;
       this.loading = false;
     });
-    this.allUsers = this.$store.getters.getAllUsers;
   },
 };
 </script>

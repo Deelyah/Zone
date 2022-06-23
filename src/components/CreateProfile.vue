@@ -95,7 +95,7 @@
                     fill="blue"
                   />
                 </svg>
-                Loading
+                Creating profile
               </span>
 
               <span v-else> Save </span>

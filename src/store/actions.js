@@ -8,14 +8,11 @@ export default {
       const response = await axios.get(`${baseUrl}/users?page=${payload}`, {
         headers: authHeader(),
       });
+
       context.commit("setAllUsers", response.data.data);
-      // console.log(response.data.data);
     } catch (error) {
       console.log(error);
     }
-    // } else {
-    //   this.$router.push("/login");
-    // }
   },
 
   async createProfile(context, payload) {
@@ -25,7 +22,7 @@ export default {
         payload,
         authHeader()
       );
-      console.log(response.data);
+      // console.log(response.data);
       context.commit("setUsersProfile", response.data);
     } catch (error) {
       console.log(error);
@@ -35,12 +32,8 @@ export default {
   async updateProfile(context, payload) {
     const id = context.state.profile.id;
     try {
-      const response = await axios.put(
-        `${baseUrl}/users/${id}`,
-        payload,
-        authHeader()
-      );
-      console.log(response.data);
+      await axios.put(`${baseUrl}/users/${id}`, payload, authHeader());
+      // console.log(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -52,7 +45,6 @@ export default {
         headers: authHeader(),
         body: payload,
       });
-      // console.log(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -74,10 +66,11 @@ export default {
     try {
       const response = await axios.post(`${baseUrl}/login`, payload);
       localStorage.setItem("token", response.data.token);
+      // console.log(localStorage.getItem("token"));
 
       const getIP = await axios.get(`https://api.ipdata.co/?api-key=${IPkey}`);
       const IP = getIP.data.ip;
-      console.log(IP);
+      // console.log(IP);
       const getLocation = await axios.get(
         `https://api.apilayer.com/ip_to_location/${IP}`,
         { headers: { apikey: `${locationKey}` } }

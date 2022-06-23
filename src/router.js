@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "@/pages/HomePage.vue";
-import SignUpForm from "@/pages/SignUpForm.vue";
-import LoginForm from "@/pages/LoginForm.vue";
-import Users from "@/pages/Users.vue";
-import myAccount from "@/pages/MyAccount.vue";
+const Home = () => import("@/pages/HomePage.vue");
+const SignUpForm = () => import("@/pages/SignUpForm.vue");
+const LoginForm = () => import("@/pages/LoginForm.vue");
+const Users = () => import("@/pages/Users.vue");
+const myAccount = () => import("@/pages/MyAccount.vue");
 
 const router = createRouter({
   history: createWebHistory(),

@@ -95,7 +95,7 @@ export default {
 
   computed: {
     location() {
-      console.log(this.$store.getters.getUserLocation);
+      // console.log(this.$store.getters.getUserLocation);
       return this.$store.getters.getUserLocation;
     },
   },

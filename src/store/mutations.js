@@ -13,6 +13,5 @@ export default {
 
   setUserLocation(state, payload) {
     state.location = payload;
-    console.log(payload);
   },
 };
