@@ -138,6 +138,7 @@ export default {
   },
   methods: {
     logOut() {
+      this.dropdownIsOpen = false;
       localStorage.removeItem("token");
       this.token;
       this.$store.commit("toggleLoginState");
